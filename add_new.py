@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from selenium.webdriver.firefox.webdriver import WebDriver
+from selenium.webdriver.common.action_chains import ActionChains
 import unittest
 from contact import Contact
 
@@ -10,7 +11,7 @@ def is_alert_present(wd):
     except:
         return False
 
-class add_new_contact(unittest.TestCase):
+class add_new(unittest.TestCase):
     def setUp(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
@@ -94,6 +95,8 @@ class add_new_contact(unittest.TestCase):
                     year="1992", adres_2="Adress 2", phone2="dgdrhtj", notes="segsrhr"))
         self.return_to_contact_page(wd)
         self.logout(wd)
+        ActionChains(wd).double_click(wd.find_element_by_name("user")).perform()
+        ActionChains(wd).double_click(wd.find_element_by_name("pass")).perform()
 
     def test_add_new_1(self):
         wd = self.wd
@@ -105,6 +108,8 @@ class add_new_contact(unittest.TestCase):
                     year="", adres_2="", phone2="", notes=""))
         self.return_to_contact_page(wd)
         self.logout(wd)
+        ActionChains(wd).double_click(wd.find_element_by_name("user")).perform()
+        ActionChains(wd).double_click(wd.find_element_by_name("pass")).perform()
 
 
     def tearDown(self):
