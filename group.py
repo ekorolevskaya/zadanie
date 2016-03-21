@@ -1,4 +1,4 @@
-# задание 2.4
+# задание 4
 class Group:
 
     def __init__(self, name,logo, comment):

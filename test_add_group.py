@@ -1,8 +1,10 @@
 # -*- coding: utf-8 -*-
-# задание 2.4
-import pytest
+# задание 4
+from application import Application
 from group import Group
-from application1 import Application
+
+import pytest
+
 
 @pytest.fixture
 def app(request):
