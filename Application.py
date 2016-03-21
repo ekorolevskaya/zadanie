@@ -1,4 +1,5 @@
-# задание 2.4
+# занятие 2
+# задание 4
 from selenium.webdriver.firefox.webdriver import WebDriver
 from group import Group
 
