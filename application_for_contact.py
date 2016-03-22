@@ -1,24 +1,21 @@
-# -*- coding: utf-8 -*-
+# занятие 2
+# задание 4
 from selenium.webdriver.firefox.webdriver import WebDriver
-from selenium.webdriver.common.action_chains import ActionChains
-import unittest
-from contact import Contact
 
-def is_alert_present(wd):
-    try:
-        wd.switch_to_alert().text
-        return True
-    except:
-        return False
 
-class add_new(unittest.TestCase):
-    def setUp(self):
+class Application_for_contact:
+
+    def __init__(self):
         self.wd = WebDriver()
         self.wd.implicitly_wait(60)
-    def open_home_page(self, wd):
+
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
-    def login(self, wd, login, password):
+    def login(self, login, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").click()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(login)
@@ -27,10 +24,12 @@ class add_new(unittest.TestCase):
         wd.find_element_by_name("pass").send_keys(password)
         wd.find_element_by_xpath("//form[@id='LoginForm']/input[3]").click()
 
-    def open_contact_page(self, wd):
+    def open_contact_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
 
-    def create_new_contact(self, wd, contact):
+    def create_new_contact(self, contact):
+        wd = self.wd
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
         wd.find_element_by_name("firstname").send_keys(contact.name)
@@ -79,41 +78,13 @@ class add_new(unittest.TestCase):
         # нажимаем на кнопку Enter
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-    def return_to_contact_page(self, wd):
+    def return_to_contact_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def test_add_new(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, login="admin", password="secret")
-        self.open_contact_page(wd)
-        self.create_new_contact(wd, Contact(name="Elena", Middle="Yrevna", Last_name="Korolevskaya", Nickname="ekorolevskaya",
-                    Title="Title", Company="Name", Adress="Mira 2", Home_telephone="656506", Mobile="89632547821",
-                    year="1992", adres_2="Adress 2", phone2="dgdrhtj", notes="segsrhr"))
-        self.return_to_contact_page(wd)
-        self.logout(wd)
-        ActionChains(wd).double_click(wd.find_element_by_name("user")).perform()
-        ActionChains(wd).double_click(wd.find_element_by_name("pass")).perform()
-
-    def test_add_new_1(self):
-        wd = self.wd
-        self.open_home_page(wd)
-        self.login(wd, login="admin", password="secret")
-        self.open_contact_page(wd)
-        self.create_new_contact(wd, Contact(name="test", Middle="", Last_name="", Nickname="",
-                    Title="", Company="", Adress="", Home_telephone="", Mobile="",
-                    year="", adres_2="", phone2="", notes=""))
-        self.return_to_contact_page(wd)
-        self.logout(wd)
-        ActionChains(wd).double_click(wd.find_element_by_name("user")).perform()
-        ActionChains(wd).double_click(wd.find_element_by_name("pass")).perform()
-
-
-    def tearDown(self):
+    def destroy(self):
         self.wd.quit()
-
-if __name__ == '__main__':
-    unittest.main()
