@@ -1,16 +1,7 @@
 # -*- coding: utf-8 -*-
 # занятие 2
 # задание 4
-import pytest
-from fixture.application_for_contact import Application_for_contact
 from model.contact import Contact
-
-
-@pytest.fixture
-def app(request):
-    fixture = Application_for_contact()
-    request.addfinalizer(fixture.destroy)
-    return fixture
 
 
 def test_add_contact_1(app):

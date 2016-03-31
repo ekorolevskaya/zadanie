@@ -62,6 +62,16 @@ class ContactHelper:
         # нажимаем на кнопку Enter
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
+    def delete_contact(self):
+        #переходим на страницу со списком контактов
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        # выбираем первый контакт
+        wd.find_element_by_name("selected[]").click()
+        # удаляем контакт
+        wd.find_element_by_name("Delete").click()
+        self.return_to_page()
+
     def return_to_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
