@@ -62,21 +62,20 @@ class ContactHelper:
         # нажимаем на кнопку Enter
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
-
+    def delete_first_contact(self):
+        # отправляемся на страницу со списком групп
+        wd = self.app.wd
+        wd.find_element_by_link_text("home").click()
+        # выбираем первую группу
+        wd.find_element_by_name("selected[]").click()
+        # удаляем первую группу
+        wd.find_element_by_css_selector("input[value='Delete']").click()
+        # подтверждаем удаление
+        wd.switch_to_alert().accept()
 
 
     def return_to_page(self):
         wd = self.app.wd
         wd.find_element_by_link_text("home page").click()
 
-    def delete_first_contact(self):
-        # отправляемся на страницу со списком групп
-        wd = self.app.wd
-        self.open_page()
-        # выбираем первую группу
-        wd.find_element_by_name("selected[]").click()
-        # удаляем первую группу
-        wd.find_element_by_name("DeleteSel()").click()
-        # подтверждаем удаление
-        wd.switch_to_alert().accept()
-        self.return_to_page()
+
