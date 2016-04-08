@@ -1,9 +1,10 @@
 #занятие 2
 #задание 6
+#задание 7
 from model.group import Group
 
-def test_delete_group(app):
+
+def test_modific_group(app):
     app.session.login(username="admin", password="secret")
-    app.group.modific_group()
-    app.group.modific_group(Group(name="new_1", logo="mimi_1", comment="comment_1"))
+    app.group.modify_first_group(Group(name="name modify", logo="logo modify", comment="comment modify"))
     app.session.logout()
