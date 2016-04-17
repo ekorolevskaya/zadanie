@@ -18,11 +18,18 @@ class Application:
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
 
+    def is_valid(self):
+        try:
+            #какой адрес страницы
+            self.wd.current_url
+            return True
+        except:
+            return False
+
     def open_home_page(self):
         # навигация
         wd = self.wd
         wd.get("http://localhost/addressbook/")
-
 
     def destroy(self):
         # метод разрушает фикстуру
