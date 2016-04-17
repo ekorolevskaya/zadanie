@@ -22,4 +22,3 @@ def test_add_contact_2(app):
     app.contact.return_to_page()
     app.session.logout()
 
-
