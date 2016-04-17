@@ -21,7 +21,6 @@ class ContactHelper:
 
     def fill_contact_form(self, contact):
         wd = self.app.wd
-        self.change_field_value(contact)
         self.change_field_value("firstname", contact.name)
         self.change_field_value("middlename", contact.Middle)
         self.change_field_value("lastname", contact.Last_name)
