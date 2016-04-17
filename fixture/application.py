@@ -13,7 +13,7 @@ class Application:
     def __init__(self):
         # контруктор, который инициализирует ссылку на драйвер и на помощников
         self.wd = WebDriver()
-        self.wd.implicitly_wait(60)
+        self.wd.implicitly_wait(5)
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
