@@ -8,10 +8,9 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def open_page(self):
+    def open_new_contact_page(self):
         wd = self.app.wd
-        if not (len(wd.find_elements_by_name("Number of results")) > 0):
-            wd.find_element_by_link_text("add new").click()
+        wd.find_element_by_link_text("add new").click()
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -80,7 +79,5 @@ class ContactHelper:
 
     def count(self):
         wd = self.app.wd
-        self.open_page()
+        self.open_new_contact_page()
         return len(wd.find_elements_by_name("selected[]"))
-
-
