@@ -1,12 +1,15 @@
-# занятие 2
-# задание 5
+from model.contact import Contact
 
 class ContactHelper:
-
 
     # конструктор
     def __init__(self, app):
         self.app = app
+
+    def open_contacts_page(self):
+        wd = self.app.wd
+        if not (wd.current_url.endswith("/index.php") and len (wd.find_elements_by_name("add")) > 0):
+            wd.find_element_by_link_text("home").click()
 
     def open_new_contact_page(self):
         wd = self.app.wd
@@ -44,6 +47,7 @@ class ContactHelper:
 
     def create(self, contact):
         wd = self.app.wd
+        self.open_new_contact_page()
         self.fill_contact_form(contact)
         # нажимаем на кнопку Enter
         wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
@@ -81,5 +85,17 @@ class ContactHelper:
     def count(self):
         wd = self.app.wd
         return len(wd.find_elements_by_name("selected[]"))
+
+    def get_contact_list(self):
+        wd = self.app.wd
+        self.open_contacts_page()
+        contacts = []
+        for element in wd.find_elements_by_name("entry"):
+            text = element.text
+            id = element.find_element_by_name("selected[]").get_attribute("value")
+            contacts.append(Contact(name=text[1], Last_name=text[0], id=id))
+        return contacts
+
+
 
 
