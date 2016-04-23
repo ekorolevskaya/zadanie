@@ -1,5 +1,6 @@
 from model.contact import Contact
 
+
 class ContactHelper:
 
     # конструктор
@@ -76,7 +77,10 @@ class ContactHelper:
         # нажимаем на кнопку редактировать
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # меняем текст в полях
-
+        # fill the form
+        self.fill_contact_form(contact)
+        #submit modification
+        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
 
     def return_to_page(self):
         wd = self.app.wd
@@ -92,10 +96,12 @@ class ContactHelper:
         self.open_contacts_page()
         contacts = []
         for element in wd.find_elements_by_name("entry"):
-            text = element.text
+            first = element.find_element_by_xpath("./td[3]").text
+            lastname = element.find_element_by_xpath("./td[2]").text
             id = element.find_element_by_name("selected[]").get_attribute("value")
-            contacts.append(Contact(name=text[1], Last_name=text[0], id=id))
+            contacts.append(Contact(name=first, Last_name=lastname, id=id))
         return contacts
+
 
 
 
