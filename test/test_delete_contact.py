@@ -1,5 +1,3 @@
-#занятие 2
-#задание 6
 from model.contact import Contact
 
 

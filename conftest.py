@@ -1,5 +1,3 @@
-#занятие 2
-#задание 6
 import pytest
 from fixture.application import Application
 

@@ -1,6 +1,3 @@
-# -*- coding: utf-8 -*-
-# занятие 2
-# задание 4
 from model.group import Group
 
 

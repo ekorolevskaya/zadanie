@@ -1,6 +1,3 @@
-# занятие 2
-# задание 5
-
 class SessionHelper:
 
     # конструктор
@@ -43,4 +40,3 @@ class SessionHelper:
             else:
                 self.logout()
         self.login(username, password)
-

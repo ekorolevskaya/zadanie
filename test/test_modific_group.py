@@ -1,6 +1,3 @@
-#занятие 2
-#задание 6
-#задание 7
 from model.group import Group
 
 

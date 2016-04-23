@@ -1,6 +1,3 @@
-# занятие 2
-# задание 5
-
 class GroupHelper:
 
 
@@ -12,6 +9,7 @@ class GroupHelper:
         wd = self.app.wd
         if not (wd.current_url.endswith("/group.php") and len(wd.find_elements_by_name("new")) > 0):
             wd.find_element_by_link_text("groups").click()
+
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
