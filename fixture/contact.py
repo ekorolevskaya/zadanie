@@ -8,7 +8,7 @@ class ContactHelper:
 
     def open_contacts_page(self):
         wd = self.app.wd
-        if not (wd.current_url.endswith("/index.php") and len (wd.find_elements_by_name("add")) > 0):
+        if not (wd.current_url.endswith("/index.php") and len(wd.find_elements_by_name("add")) > 0):
             wd.find_element_by_link_text("home").click()
 
     def open_new_contact_page(self):
@@ -60,7 +60,7 @@ class ContactHelper:
     def delete_first_contact(self):
         # отправляемся на страницу со списком групп
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_contacts_page()
         self.select_first_contact()
         # удаляем первую группу
         wd.find_element_by_css_selector("input[value='Delete']").click()
@@ -71,7 +71,7 @@ class ContactHelper:
     def modific_first_contact(self, contact):
         # отправляемся на страницу со списком групп
         wd = self.app.wd
-        wd.find_element_by_link_text("home").click()
+        self.open_contacts_page()
         self.select_first_contact()
         # нажимаем на кнопку редактировать
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
