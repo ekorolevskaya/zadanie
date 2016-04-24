@@ -59,30 +59,41 @@ class ContactHelper:
         # выбираем первую группу
         wd.find_element_by_name("selected[]").click()
 
+
+#
     def delete_first_contact(self):
-        # отправляемся на страницу со списком групп
+        wd = self.app.wd
+        self.delete_contact_by_index(0)
+
+    def delete_contact_by_index(self, index):
+        # отправляемся на страницу со списком контактов
         wd = self.app.wd
         self.open_contacts_page()
-        self.select_first_contact()
-        # удаляем первую группу
+        self.select_contact_by_index(index)
+        # удаляем первый контакт
         wd.find_element_by_css_selector("input[value='Delete']").click()
         # подтверждаем удаление
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
+    def select_contact_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
-    def modific_first_contact(self, contact):
+    def modific_first_contact(self):
+        self.modific_contact_by_index(0)
+
+    def modific_contact_by_index(self, index, contact):
         # отправляемся на страницу со списком групп
         wd = self.app.wd
         self.open_contacts_page()
-        self.select_first_contact()
+        self.select_contact_by_index(index)
         # нажимаем на кнопку редактировать
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # меняем текст в полях
-        # fill the form
         self.fill_contact_form(contact)
-        #submit modification
-        wd.find_element_by_xpath("//div[@id='content']/form/input[21]").click()
+        wd.find_element_by_name("update").click()
+        self.open_contacts_page()
         self.contact_cache = None
 
     def return_to_page(self):

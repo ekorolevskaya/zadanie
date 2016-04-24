@@ -40,25 +40,36 @@ class GroupHelper:
 
 
     def delete_first_group(self):
+        wd = self.app.wd
+        self.delete_group_by_index(0)
+
+    def delete_group_by_index(self, index):
         # отправляемся на страницу со списком групп
         wd = self.app.wd
         self.open_groups_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         # удаляем первую группу
         wd.find_element_by_name("delete").click()
         self.return_to_groups_page()
         self.group_cache = None
 
+    def select_group_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
 
     def select_first_group(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
-    def modific_first_group(self, new_group_data):
+    def modific_first_group(self):
+        wd = self.app.wd
+        self.modific_group_by_index(0)
+
+    def modific_group_by_index(self, index, new_group_data):
         # отправляемся на страницу со списком групп
         wd = self.app.wd
         self.open_groups_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         # нажимаем на кнопку Edit
         wd.find_element_by_name("edit").click()
         # меняем текст в полях
@@ -67,7 +78,6 @@ class GroupHelper:
         wd.find_element_by_name("update").click()
         self.return_to_groups_page()
         self.group_cache = None
-
 
     def return_to_groups_page(self):
         wd = self.app.wd
