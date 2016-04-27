@@ -89,7 +89,7 @@ class ContactHelper:
         self.open_contacts_page()
         self.select_contact_by_index(index)
         # нажимаем на кнопку редактировать
-        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        wd.find_elements_by_xpath("//img[@src='icons/pencil.png']")[index].click()
         # меняем текст в полях
         self.fill_contact_form(contact)
         wd.find_element_by_name("update").click()
