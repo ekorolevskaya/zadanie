@@ -45,7 +45,7 @@ class ContactHelper:
         if not wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[12]").is_selected():
             wd.find_element_by_xpath("//div[@id='content']/form/select[2]//option[12]").click()
         # заполняем год рождения
-        self.change_field_value("byear",    contact.year)
+        self.change_field_value("byear",    contact.byear)
         self.change_field_value("address2", contact.addres_2)
         self.change_field_value("phone2",   contact.phone2)
         self.change_field_value("notes",    contact.notes)
