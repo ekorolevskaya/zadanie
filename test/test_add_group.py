@@ -1,18 +1,9 @@
 from model.group import Group
 import pytest
-import random
-import string
+#from data.add_group import testdata
+from data.groups import constant as testdata
 
 
-def random_string(prefix, maxlen):
-    symbols = string.ascii_letters + string.digits + string.punctuation + ""*10
-    return prefix + "".join([random.choice(symbols) for i in range(random.randrange(maxlen))])
-
-
-testdata = [Group(name="", logo="", comment="")] +[
-        Group(name=random_string("name=", 10), logo=random_string("logo", 20), comment=random_string("comment", 20))
-        for i in range(5)
-]
 
 #testdata = [
 #        Group(name=name, logo=logo, comment=comment)
@@ -22,8 +13,9 @@ testdata = [Group(name="", logo="", comment="")] +[
 #]
 
 
-@pytest.mark.parametrize("group", testdata, ids=[str(x) for x in testdata])
-def test_add_group(app, group):
+#@pytest.mark.parametrize("group", testdata, ids=[str(x) for x in testdata])
+def test_add_group(app, json_groups):
+    group = json_groups
     old_groups = app.group.get_group_list()
     app.group.create(group)
     assert len(old_groups) + 1 == app.group.count()
