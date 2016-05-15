@@ -79,9 +79,22 @@ class ContactHelper:
         wd.switch_to_alert().accept()
         self.contact_cache = None
 
+    def delete_contact_by_id(self, id):
+        wd = self.app.wd
+        self.open_contacts_page()
+        self.select_contact_by_id(id)
+        wd.find_element_by_css_selector("input[value='Delete']").click()
+        # подтверждаем удаление
+        wd.switch_to_alert().accept()
+        self.contact_cache = None
+
     def select_contact_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_name("selected[]")[index].click()
+
+    def select_contact_by_id(self, id):
+        wd = self.app.wd
+        wd.find_element_by_css_selector("input[value='%s']" % id).click()
 
     def modific_first_contact(self):
         self.modific_contact_by_index(0)
@@ -95,6 +108,16 @@ class ContactHelper:
         wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
         # меняем текст в полях
         self.fill_contact_form(contact)
+        wd.find_element_by_name("update").click()
+        self.open_contacts_page()
+        self.contact_cache = None
+
+    def modific_contact_by_id(self, new_contact_data):
+        wd = self.app.wd
+        self.open_contacts_page()
+        self.select_contact_by_id(new_contact_data.id)
+        wd.find_element_by_xpath("//table[@id='maintable']/tbody/tr[2]/td[8]/a/img").click()
+        self.fill_contact_form(new_contact_data)
         wd.find_element_by_name("update").click()
         self.open_contacts_page()
         self.contact_cache = None
