@@ -4,8 +4,8 @@ from model.group import Group
 
 
 constant = [
-    Group(name="name1", logo="logo1", comment="comment1"),
-    Group(name="name2", logo="logo2", comment="comment2")
+    Group(name="name1", header="logo1", footer="comment1"),
+    Group(name="name2", header="logo2", footer="comment2")
 ]
 
 
