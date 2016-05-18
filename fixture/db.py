@@ -38,7 +38,7 @@ class DbFixture:
         return list
 
 
-    def get_contact_in_groups(self):
+    def get_contact_in_group(self):
         list = []
         cursor = self.connection.cursor()
         try:

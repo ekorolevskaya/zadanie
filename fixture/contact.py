@@ -194,6 +194,23 @@ class ContactHelper:
         phone2 = re.search("P: (.*)", text).group(1)
         return Contact(homephone=homephone, mobilephone=mobilephone, workphone=workphone, phone2=phone2)
 
+    def add_contact_to_group(self, id):
+        wd = self.app.wd
+        wd.find_element_by_id("%s" % id).click()
+        if not wd.find_element_by_xpath("//div[@class='right']/select//option[12]").is_selected():
+            wd.find_element_by_xpath("//div[@class='right']/select//option[12]").click()
+        wd.find_element_by_name("add").click()
+        self.open_contacts_page()
+
+    def delete_contact_from_group(self, id):
+        wd = self.app.wd
+        if not wd.find_element_by_xpath("//form[@id='right']/select//option[14]").is_selected():
+            wd.find_element_by_xpath("//form[@id='right']/select//option[14]").click()
+
+        wd.find_element_by_id("%s" % id).click()
+        wd.find_element_by_name("remove").click()
+        self.open_contacts_page()
+
 
 
 
